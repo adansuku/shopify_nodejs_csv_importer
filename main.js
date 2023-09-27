@@ -1,21 +1,11 @@
 // main.js
-require('dotenv').config();
-const { Shopify } = require('./config'); // Asegúrate de que el nombre del objeto sea correcto
-const { obtenerProductos, mostrarResumen } = require('./utils');
+const readCSV = require('./tools/csvReader');
+const { obtainProducts, updateVariants } = require('./tools/updateProducts');
 
-// Data Store
-let totalVariantsUpdate = 0;
-let totalProductsUpdate = 0;
-let undefinedProducts = 0;
-let allProducts = [];
-let data = [];
+const data = [];
 
-// Leemos el CSV y comenzamos el proceso
-fs.createReadStream('/read_from_here.csv')
-	.pipe(csv())
-	.on('data', (row) => {
-		data.push(row);
-	})
-	.on('end', () => {
-		obtenerProductos(data);
-	});
+readCSV('example_csv.csv', (row) => {
+	data.push(row);
+}, () => {
+	obtainProducts(data, updateVariants);
+});
