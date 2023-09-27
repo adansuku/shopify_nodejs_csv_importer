@@ -3,7 +3,7 @@
 const shopify = require('./shopifyConnector');
 const readCSV = require('./csvReader');
 
-const location_id = process.env.SHOPIFY_LOCATION_ID;  // Ahora se utiliza process.env para obtener el valor
+const location_id = process.env.SHOPIFY_LOCATION_ID;
 let totalVariantsUpdate = 0;
 let totalProductsUpdate = 0;
 let undefinedProducts = 0;
